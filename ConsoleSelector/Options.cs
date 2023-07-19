@@ -9,7 +9,6 @@ public class Options
 
     public void CreateAccountSubOptions()
     {
-        AccountSubOptions = new List<SubOption>();
         AccountSubOptions.Add(new SubOption() {Name = "rwrd057", Values = new List<string>(new[]{"dev", "sbx1", "sbx5"})});
         AccountSubOptions.Add(new SubOption() {Name = "rwrd058", Values = new List<string>(new[]{"qa", "uat", "uat3"})});
         AccountSubOptions.Add(new SubOption() {Name = "rwrd073", Values = new List<string>(new[]{"prod"})});
