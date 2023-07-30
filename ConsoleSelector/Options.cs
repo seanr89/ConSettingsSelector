@@ -5,6 +5,7 @@ public class Options
     public string[] Environments = {"dev", "qa", "uat", "prod"};
     public string[] Projects = {"GMM", "FAB", "WARBA"}; 
     public string[] Accounts = {"rwrd057", "rwrd058", "rwrd073"};
+    public string[] Buckets = {"rwrd057-dev", "rwrd057-sbx1", "rwrd057-sbx5", "rwrd058-qa", "rwrd058-uat", "rwrd058-uat3", "rwrd073-prod"};
     public List<SubOption> AccountSubOptions { get; set; } = new();
 
     public void CreateAccountSubOptions()

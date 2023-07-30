@@ -1,6 +1,27 @@
 [
     {
-        "Key" : "Region",
-        "Value" : "us-east-1"
+        "Key" : "allowRefund",
+        "Value" : "true",
+        "Region" : "all"
+    },
+    {
+        "Key" : "currencyCode",
+        "Value" : "GBP",
+        "Region" : "all"
+    },
+    {
+        "Key" : "rmsPartnerURL",
+        "Value" : "https://rms-qa.ingrammicro.com",
+        "Region" : "central"
+    },
+    {
+        "Key" : "bucketName",
+        "Value" : "mc1-etl-bucket",
+        "Region" : "region"
+    },
+    {
+        "Key" : "pendingPeriod",
+        "Value" : "35",
+        "Region" : "region"
     }
 ]

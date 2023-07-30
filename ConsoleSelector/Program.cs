@@ -9,50 +9,57 @@ AnsiConsole.Write(
         .Color(Color.Red));
 
 bool continueLoop = true;
+Console.CancelKeyPress += delegate(object? sender, ConsoleCancelEventArgs e) {
+    e.Cancel = true;
+    continueLoop = false;
+    Console.WriteLine("Exiting...");
+};
+
 
 while(continueLoop)
 {
     AskQuestions();
 }
 
+/// <summary>
+/// Ask the user a series of questions
+/// and echo the answers back to the terminal.
+/// </summary>
 void AskQuestions(){
-    // Ask for the user's favorite fruit
-    var account = AnsiConsole.Prompt(
-        new SelectionPrompt<string>()
-            .Title("Select an [green]Account[/]?")
-            .PageSize(10)
-            .MoreChoicesText("[grey](Move up and down to reveal more accounts)[/]")
-            .AddChoices(opts.Accounts));
 
-    // Echo the account back to the terminal
-    AnsiConsole.MarkupLine($"You selected the [red]{account}[/] account!");
+    var account = CreateAndWaitForResponse("Select an [green]Account[/]?", opts.Accounts);
 
-    var env = AnsiConsole.Prompt(
-        new SelectionPrompt<string>()
-            .Title("Select an [green]Environment[/]?")
-            .PageSize(10)
-            .MoreChoicesText("[grey](Move up and down to reveal more environments)[/]")
-            .AddChoices(opts.AccountSubOptions.First(x => x.Name == account).Values));
+    var region = CreateAndWaitForResponse("Select a [green]Region[/]?", opts.Regions);
 
-    // Echo the env back to the terminal
-    AnsiConsole.MarkupLine($"You selected the [red]{env}[/] environment!");
+    var env = CreateAndWaitForResponse("Select an [green]Environment[/]?", 
+        opts.AccountSubOptions.First(x => x.Name == account).Values.ToArray());
 
-    var project = AnsiConsole.Prompt(
-        new SelectionPrompt<string>()
-            .Title("Select a [green]Project[/]?")
-            .PageSize(10)
-            .MoreChoicesText("[grey](Move up and down to reveal more projects)[/]")
-            .AddChoices(opts.Projects));
+    var project = CreateAndWaitForResponse("Select a [green]Project[/]?", opts.Projects);
 
-    // Echo the env back to the terminal
-    AnsiConsole.MarkupLine($"You selected the [red]{project}[/] project!");
-
-
-    AnsiConsole.MarkupLine($"Choices Entered- Account:[red]{account}[/] Env:[red]{env}[/] Project:[red]{project}[/]");
+    AnsiConsole.MarkupLine($"Choices Entered - Account:[red]{account}[/] Env:[red]{env}[/] Project:[red]{project}[/]");
 
     continueLoop = AnsiConsole.Confirm("Do you want to continue?");
 }
 
+/// <summary>
+/// Create selection prompt and wait for response
+/// </summary>
+/// <param name="message"></param>
+/// <param name="choices"></param>
+string CreateAndWaitForResponse(string message, string[] choices)
+{
+    var response = AnsiConsole.Prompt(
+        new SelectionPrompt<string>()
+            .Title(message)
+            .PageSize(10)
+            .MoreChoicesText("[grey](Move up and down to reveal more choices)[/]")
+            .AddChoices(choices));
+
+    // Echo the response back to the terminal
+    AnsiConsole.MarkupLine($"You selected [red]{response}[/]!");
+
+    return response;
+}
 
 
 AnsiConsole.WriteLine("App Complete!");
