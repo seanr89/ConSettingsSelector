@@ -16,6 +16,10 @@ public class Options
     }
 }
 
+/// <summary>
+/// Example item for AccountSubOptions and other nested items
+/// </summary>
+/// <value></value>
 public record SubOption
 {
     public string Name { get; set; }

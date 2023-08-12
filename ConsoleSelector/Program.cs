@@ -13,6 +13,7 @@ Console.CancelKeyPress += delegate(object? sender, ConsoleCancelEventArgs e) {
     e.Cancel = true;
     continueLoop = false;
     Console.WriteLine("Exiting...");
+    Environment.Exit(0);
 };
 
 
@@ -28,16 +29,13 @@ while(continueLoop)
 void AskQuestions(){
 
     var account = CreateAndWaitForResponse("Select an [green]Account[/]?", opts.Accounts);
-
     var region = CreateAndWaitForResponse("Select a [green]Region[/]?", opts.Regions);
-
     var env = CreateAndWaitForResponse("Select an [green]Environment[/]?", 
         opts.AccountSubOptions.First(x => x.Name == account).Values.ToArray());
 
     var project = CreateAndWaitForResponse("Select a [green]Project[/]?", opts.Projects);
 
     AnsiConsole.MarkupLine($"Choices Entered - Account:[red]{account}[/] Env:[red]{env}[/] Project:[red]{project}[/]");
-
     continueLoop = AnsiConsole.Confirm("Do you want to continue?");
 }
 

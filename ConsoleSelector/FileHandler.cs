@@ -1,5 +1,8 @@
 
 
+/// <summary>
+/// Simple file handler to read in a file
+/// </summary>
 public class FileHandler
 {
     public void readFile()
